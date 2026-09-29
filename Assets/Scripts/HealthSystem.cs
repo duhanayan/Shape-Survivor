@@ -19,7 +19,7 @@ public class HealthSystem
 			Health = (int)Math.Min((long)Health + healAmount, MaxHealth);
 	}
 
-	public void Damage(int damageAmount)
+	public void TakeDamage(int damageAmount)
 	{
 		if (damageAmount > 0)
 			Health = (int)Math.Max((long)Health - damageAmount, 0);
