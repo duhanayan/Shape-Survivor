@@ -9,6 +9,9 @@ public class PlayerHealth : MonoBehaviour
 	public int Health => _healthSystem.Health;
 	public bool IsDead => Health <= 0;
 
+	[SerializeField] private int _health;
+	[SerializeField] private bool _isDead;
+
 	private void Awake()
 	{
 		_playerStats = GetComponent<PlayerStats>();
@@ -16,6 +19,17 @@ public class PlayerHealth : MonoBehaviour
 
 		_healthSystem.SetMaximumHealth(_playerStats.MaxHealth);
 		_healthSystem.SetHealth(_playerStats.StartingHealth);
+	}
+
+	private void Update()
+	{
+		UpdateInspectorValues();
+	}
+
+	private void UpdateInspectorValues()
+	{
+		_health = Health;
+		_isDead = IsDead;
 	}
 
 	public void TakeDamage(int damageAmount)
@@ -26,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
 			return;
 		}
 
-		_healthSystem.Damage(damageAmount);
+		_healthSystem.TakeDamage(damageAmount);
 	}
 
 	public void Heal(int healAmount)
